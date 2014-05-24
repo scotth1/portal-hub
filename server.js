@@ -19,4 +19,5 @@ http.createServer(function(req, res) {
         var collection = db.collection('test');
         collection.insert(body, {w:1}, function(err, result) {});
         };   
+    });
 }).listen(9080, "");
