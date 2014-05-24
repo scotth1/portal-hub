@@ -1,0 +1,27 @@
+{
+  "name" : "portal-hub",
+  "version" : "0.0.1",
+  "main" : "./server.js",
+  "author" : {
+    "name" : "Scott Hamilton, Chris Bolton",
+    "email" : "scotth1.git@popplanet.biz"
+  },
+  "keywords" : [ ],
+  "licenses" : {
+    "type" : "none"
+  },
+  "repository" : {
+    "type" : "git",
+    "url" : "git://github.com/scotth1/portal-hub.git"
+  },
+  "bugs" : {
+    "url" : "http://github.com/scotth1/portal-hub/issues"
+  },
+  "license" : {
+    "type" : "gplv2"
+  },
+  "dependencies" : {
+    "express" : "4.3.1",
+    "mongodb" : "1.4.5"
+  }
+}
