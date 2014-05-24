@@ -4,9 +4,23 @@
  * and open the template in the editor.
  */
 
-function doSomething() {
-    
+
+var mongoClient = require('mongodb').MongoClient;
+
+var atnCache = module.exports = function() {
+    var db;
+// Initialize connection once
+    mongoClient.connect("mongodb://localhost:27017/exampleDb", function(err, database) {
+        if (err)
+            throw err;
+
+        db = database;
+    });
+    return {
+        insert: function(body) {
+
+        }
+    }
 }
 
-// Functions which will be available to external callers
-exports.doSomething = doSomething;
+

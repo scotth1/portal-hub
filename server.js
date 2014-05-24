@@ -5,7 +5,8 @@
  */
 
 var http = require('http'), path = require('path');
-var express = require('express'), app = express(), server = http.createServer(app);
+var express = require('express'), bodyParser = require('body-parser'), app = express(), server = http.createServer(app);
+//var db = require('./db/portals');
 
 var mongoClient = require('mongodb').MongoClient;
 var db;
@@ -18,6 +19,7 @@ mongoClient.connect("mongodb://localhost:27017/exampleDb", function(err, databas
 });
 
 app.use(express.static(__dirname + '/public/app'));
+app.use(bodyParser());
 app.post('/portals', function(req, res) {
     // save portal object
     console.log("BODY: "+req.body);
