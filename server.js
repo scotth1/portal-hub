@@ -18,7 +18,15 @@ mongoClient.connect("mongodb://localhost:27017/exampleDb", function(err, databas
 });
 
 app.use(express.static(__dirname + '/public/app'));
-
+app.post('/portals', function(req, res) {
+    // save portal object
+    var collection = db.collection('test');
+    collection.insert(req.body, {w: 1}, function(err, result) {
+        if (result) {
+            res.send(200);
+        }
+    });
+});
 
 server.listen(process.env.PORT || 9080);
 var addr = server.address().address;
@@ -26,23 +34,23 @@ console.log('Started listening on: '.concat(addr).concat(':').concat(process.env
 
 
 /********
-http.createServer(function(req, res) {
-    var body = "";
-    req.on('data', function(chunk) {
-        body += chunk;
-    });
-    res.writeHead(200, {
-        'Content-Type': 'text/plain; charset=UTF-8'
-    });
-    res.end('Hello from portal-hub.\n');
-    MongoClient.connect("mongodb://localhost:27017/exampleDb", function(err, db) {
-        if (!err) {
-            console.log("We are connected");
-            var collection = db.collection('test');
-            collection.insert(body, {w: 1}, function(err, result) {
-            });
-        }
-    });
-}).listen(9080, "");
-
-**********/
+ http.createServer(function(req, res) {
+ var body = "";
+ req.on('data', function(chunk) {
+ body += chunk;
+ });
+ res.writeHead(200, {
+ 'Content-Type': 'text/plain; charset=UTF-8'
+ });
+ res.end('Hello from portal-hub.\n');
+ MongoClient.connect("mongodb://localhost:27017/exampleDb", function(err, db) {
+ if (!err) {
+ console.log("We are connected");
+ var collection = db.collection('test');
+ collection.insert(body, {w: 1}, function(err, result) {
+ });
+ }
+ });
+ }).listen(9080, "");
+ 
+ **********/
