@@ -11,5 +11,10 @@ http.createServer(function(req, res) {
     });
     
     res.end('Hello from portal-hub.\n');
-    
+     MongoClient.connect("mongodb://localhost:27017/exampleDb", function(err, db) {
+                if(!err) {
+                console.log("We are connected");
+                var collection = db.collection('test');
+                collection.insert(body, {w:1}, function(err, result) {});
+                 };   
 }).listen(9080, "");
