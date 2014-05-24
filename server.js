@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+var MongoClient = require('mongodb').MongoClient;
 var http = require('http');
 http.createServer(function(req, res) {
     var body = "";
