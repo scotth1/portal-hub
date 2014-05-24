@@ -20,11 +20,16 @@ mongoClient.connect("mongodb://localhost:27017/exampleDb", function(err, databas
 app.use(express.static(__dirname + '/public/app'));
 app.post('/portals', function(req, res) {
     // save portal object
+    console.log("BODY: "+req.body);
     var body = JSON.parse(req.body);
     var collection = db.collection('test');
     collection.insert(body, {w: 1}, function(err, result) {
-        if (result) {
+        if (err) {
+            res.send(500, "Failed to save");
+            console.log(err);
+        } else {
             res.send(200);
+            console.log("OK!");
         }
     });
 });
