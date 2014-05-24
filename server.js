@@ -6,11 +6,16 @@
 
 var http = require('http');
 http.createServer(function(req, res) {
+    var body = "";
+    req.on('data', function (chunk) {
+    body += chunk;
+  });
     res.writeHead(200, {
         'Content-Type': 'text/plain; charset=UTF-8'
     });
     
     res.end('Hello from portal-hub.\n');
+
      MongoClient.connect("mongodb://localhost:27017/exampleDb", function(err, db) {
                 if(!err) {
                 console.log("We are connected");
