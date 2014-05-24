@@ -23,7 +23,7 @@ app.use(bodyParser());
 app.post('/portals', function(req, res) {
     // save portal object
     console.log("BODY: "+req.body);
-    var body = JSON.parse(req.body);
+    var body = req.body;
     var collection = db.collection('test');
     collection.insert(body, {w: 1}, function(err, result) {
         if (err) {
