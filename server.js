@@ -20,8 +20,9 @@ mongoClient.connect("mongodb://localhost:27017/exampleDb", function(err, databas
 app.use(express.static(__dirname + '/public/app'));
 app.post('/portals', function(req, res) {
     // save portal object
+    var body = JSON.parse(req.body);
     var collection = db.collection('test');
-    collection.insert(req.body, {w: 1}, function(err, result) {
+    collection.insert(body, {w: 1}, function(err, result) {
         if (result) {
             res.send(200);
         }
