@@ -37,7 +37,8 @@ app.post('/portals', function(req, res) {
 });
 
 server.listen(process.env.PORT || 9080);
-var addr = server.address().address;
+//var addr = server.address().address;
+var addr = "localhost";
 console.log('Started listening on: '.concat(addr).concat(':').concat(process.env.PORT || 9080));
 
 
