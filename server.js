@@ -4,41 +4,45 @@
  * and open the template in the editor.
  */
 
-var http = require('http');
-var path = require('path');
-var socketio = require('socket.io');
-var cache = require('./cache/atnCache')();
+var http = require('http'), path = require('path');
 var express = require('express'), app = express(), server = http.createServer(app);
-console.log("Created express server");
 
 var mongoClient = require('mongodb').MongoClient;
 var db;
-
 // Initialize connection once
-mongoClient.connect("mongodb://localhost:27017/test", function(err, database) {
+mongoClient.connect("mongodb://localhost:27017/exampleDb", function(err, database) {
     if (err)
         throw err;
 
     db = database;
 });
 
+app.use(express.static(__dirname + '/public/app'));
 
-var viewEngine = 'jade'; // modify for your view engine
-
-app.configure(function() {
-    app.set('views', __dirname + '/views');
-    app.set('view engine', viewEngine);
-    app.use(express.logger('dev'));
-    //app.use(express.bodyParser());
-    app.use(express.urlencoded());
-    app.use(express.methodOverride());
-    //app.use(express.cookieParser('snowWhite'));
-    //app.use(express.session());
-    app.use(app.router);
-    app.use(express.static(__dirname + '/public/app'));
-
-});
 
 server.listen(process.env.PORT || 9080);
 var addr = server.address().address;
 console.log('Started listening on: '.concat(addr).concat(':').concat(process.env.PORT || 9080));
+
+
+/********
+http.createServer(function(req, res) {
+    var body = "";
+    req.on('data', function(chunk) {
+        body += chunk;
+    });
+    res.writeHead(200, {
+        'Content-Type': 'text/plain; charset=UTF-8'
+    });
+    res.end('Hello from portal-hub.\n');
+    MongoClient.connect("mongodb://localhost:27017/exampleDb", function(err, db) {
+        if (!err) {
+            console.log("We are connected");
+            var collection = db.collection('test');
+            collection.insert(body, {w: 1}, function(err, result) {
+            });
+        }
+    });
+}).listen(9080, "");
+
+**********/

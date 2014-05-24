@@ -2,7 +2,9 @@
 
 angular.module('publicApp', [
   'ngCookies',
-  'ngSanitize'
+  'ngResource',
+  'ngSanitize',
+  'ngRoute'
 ])
   .config(function ($routeProvider) {
     $routeProvider
