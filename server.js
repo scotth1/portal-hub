@@ -22,7 +22,7 @@ app.use(express.static(__dirname + '/public/app'));
 app.use(bodyParser());
 app.post('/portals', function(req, res) {
     // save portal object
-    console.log("BODY: "+req.body);
+    console.log("BODY: "+JSON.stringify(req.body));
     var body = req.body;
     var collection = db.collection('test');
     collection.insert(body, {w: 1}, function(err, result) {
@@ -30,8 +30,9 @@ app.post('/portals', function(req, res) {
             res.send(500, "Failed to save");
             console.log(err);
         } else {
-            res.send(200);
-            console.log("OK!");
+            var id = result._id;
+            res.send(200, "Inserted "+id);
+            console.log("OK!"+JSON.stringify(result));
         }
     });
 });
