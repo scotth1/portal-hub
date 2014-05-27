@@ -20,6 +20,13 @@ mongoClient.connect("mongodb://localhost:27017/exampleDb", function(err, databas
 
 app.use(express.static(__dirname + '/public/app'));
 app.use(bodyParser());
+app.use(function(req, res, next) {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+//    res.setHeader("Access-Control-Allow-Headers", "*");
+    res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    return next();
+  });
 app.post('/portals', function(req, res) {
     // save portal object
     console.log("BODY: "+JSON.stringify(req.body));
