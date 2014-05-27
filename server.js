@@ -21,6 +21,7 @@ mongoClient.connect("mongodb://localhost:27017/exampleDb", function(err, databas
 app.use(express.static(__dirname + '/public/app'));
 app.use(bodyParser());
 app.use(function(req, res, next) {
+    //Allow xsite scripts
     res.setHeader("Access-Control-Allow-Origin", "*");
 //    res.setHeader("Access-Control-Allow-Headers", "*");
     res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
@@ -40,6 +41,8 @@ app.post('/portals', function(req, res) {
             var id = result._id;
             res.send(200, "Inserted "+id);
             console.log("OK!"+JSON.stringify(result));
+            //ensure unique entries
+            db.text.ensureIndex({title:1},{unique:true});
         }
     });
 });
