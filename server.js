@@ -41,8 +41,8 @@ app.post('/portals', function(req, res) {
             var id = result._id;
             res.send(200, "Inserted "+id);
             console.log("OK!"+JSON.stringify(result));
-            //ensure unique entries
-            collection.ensureIndex({title:1},{unique:true});
+
+
         }
     });
 });
