@@ -42,9 +42,7 @@ app.post('/portals', function(req, res) {
             res.send(200, "Inserted "+id);
             console.log("OK!"+JSON.stringify(result));
             //ensure unique entries
-            BasicDBObject query = new BasicDBObject("title", 1)
-                                .append("unique", "true");
-            collection.createIndex(query);
+            collection.ensureIndex({title:1},{unique:true});
         }
     });
 });
